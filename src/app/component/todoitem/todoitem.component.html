@@ -1,23 +1,22 @@
-<div class="ui grid container center aligned" style="padding-top:2em">
-  <div class="row">
-      <div *ngIf="todolist && todolist.length">
-    <div class="eight wide column">
-      <table class="ui teal single line table">
+<div class="ui grid container center aligned two column" style="padding-top:2em">
+  <div *ngIf="todolist && todolist.length">
+    <div class="one wide column">
+      <table class="ui teal single line table" style="min-width:550px">
         <tbody>
           <tr *ngFor="let todo of todolist" [class.finished]="todo.IsDone">
             <td>{{todo.Name}}</td>
-            <td>{{todo.DueDate | date : "dd/MM/yyyy"}}</td>
+            <!-- <td>{{<todo class="DueDateUtc"></todo> | date : "dd/MM/yyyy"}}</td> -->
             <td>
               <div class="ui checkbox">
-                <input type="checkbox"  [(ngModel)]="todo.IsDone" [ngModelOptions]="{standalone: true}" [checked]="todo.IsDone" />
+                <input type="checkbox" [(ngModel)]="todo.IsDone" [ngModelOptions]="{standalone: true}"
+                  [checked]="todo.IsDone" />
                 <label>Finished?</label>
               </div>
             </td>
-            <td><button class="ui red button" (click)="Delete(todo)">Delete</button></td>
+            <td><button class="ui red button" (click)="Delete(todo.Id)">Delete</button></td>
           </tr>
         </tbody>
       </table>
-    </div>
     </div>
   </div>
 </div>

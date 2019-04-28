@@ -3,6 +3,6 @@ export class TodoItem {
     Name:string;
     Description:string;
     IsDone: boolean;
-    CreatedDatetimeUtc: Date;
-    DueDateUtc: Date;
+    CreatedDatetimeUtc: string;
+    DueDateUtc: string;
 } 

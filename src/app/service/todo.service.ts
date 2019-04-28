@@ -15,10 +15,11 @@ export class TodoService {
   ) { }
 
   getTodos():Observable<TodoItem[]>{
-    return this.http.get<ApiResponse>(this.getTodoApi,{observe:'body'})
+    return this.http.get(this.getTodoApi)
     .pipe(
-      tap(_=>  console.log("Fetch data "+_.body)),
-      map(resp=>resp.body as TodoItem[])
+      map((resp:any)=> JSON.parse(resp.body)),
+      tap(_=>  console.log("Fetched data"))
+
     );
   }
 }

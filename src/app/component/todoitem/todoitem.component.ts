@@ -20,9 +20,7 @@ export class TodoitemComponent implements OnInit {
 
   getTodos():void{
     this.todoService.getTodos().subscribe(todos => {
-      this.todolist = todos as TodoItem[];
-      console.log(this.todolist.length)
-      console.log(this.todolist);
+      this.todolist=todos;      
     });
   }
 
