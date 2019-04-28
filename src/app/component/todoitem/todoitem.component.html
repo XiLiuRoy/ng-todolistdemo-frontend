@@ -1,3 +1,23 @@
-<p>
-  todoitem works!
-</p>
+<div class="ui grid container center aligned" style="padding-top:2em">
+  <div class="row">
+      <div *ngIf="todolist && todolist.length">
+    <div class="eight wide column">
+      <table class="ui teal single line table">
+        <tbody>
+          <tr *ngFor="let todo of todolist" [class.finished]="todo.IsDone">
+            <td>{{todo.Name}}</td>
+            <td>{{todo.DueDate | date : "dd/MM/yyyy"}}</td>
+            <td>
+              <div class="ui checkbox">
+                <input type="checkbox"  [(ngModel)]="todo.IsDone" [ngModelOptions]="{standalone: true}" [checked]="todo.IsDone" />
+                <label>Finished?</label>
+              </div>
+            </td>
+            <td><button class="ui red button" (click)="Delete(todo)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+</div>

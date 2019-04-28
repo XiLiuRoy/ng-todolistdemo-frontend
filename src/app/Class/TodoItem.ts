@@ -1,6 +1,8 @@
 export class TodoItem {
+    Id:string;
     Name:string;
     Description:string;
     IsDone: boolean;
-    DueDate: Date;
+    CreatedDatetimeUtc: Date;
+    DueDateUtc: Date;
 } 
