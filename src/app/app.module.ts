@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TodolistComponent } from './component/todolist/todolist.component';
+import { AddTodoItemComponent } from './component/AddTodoItem/addTodoItem.component';
 import { TodoitemComponent } from './component/todoitem/todoitem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodolistComponent,
+    AddTodoItemComponent,
     TodoitemComponent
   ],
   imports: [
