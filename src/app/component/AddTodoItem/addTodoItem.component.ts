@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoItem } from  '../../Class/TodoItem';
+import { TodoItemViewModel} from '../../Class/TodoItemViewModel'
+import { TodoService} from '../../service/todo.service';
 
 @Component({
   selector: 'app-addTodoItem',
@@ -8,17 +10,20 @@ import { TodoItem } from  '../../Class/TodoItem';
 })
 export class AddTodoItemComponent implements OnInit {
 
-  todolist:Array<TodoItem>;
+  newTodo:TodoItemViewModel;
 
-  constructor() {
-    let todolist = [
-      {
-        Name:"todo list 1"
-      }
-    ]
+  constructor(private todoService:TodoService) {
+    
    }
 
   ngOnInit() {
+    this.newTodo = new TodoItemViewModel();
+    console.log(this.newTodo);
+  }
+
+  addTodo():void{
+    console.log(this.newTodo);
+    this.todoService.addTodos(this.newTodo).subscribe(todo => console.log("add todo"));
   }
 
 }

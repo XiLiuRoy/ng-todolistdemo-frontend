@@ -3,8 +3,8 @@
     <div class="ui form">
       <div class="field">
         <div class="ui right action input">
-          <input type="text" placeholder="Type something to do" />
-          <div class="ui teal button">
+          <input type="text" [(ngModel)]="newTodo.Name" placeholder="Type something to do" />
+          <div class="ui teal button" (click)="addTodo()" >
             <i class="add icon"></i>
             Add
           </div>
