@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoItem} from '../../Class/TodoItem';
-import { TodoService } from '../../service/todo.service'
+import { TodoItemViewModel } from '../../Class/TodoItemViewModel';
+import { TodoService } from '../../service/todo.service';
 
 @Component({
   selector: 'app-todoitem',
@@ -9,23 +9,25 @@ import { TodoService } from '../../service/todo.service'
 })
 export class TodoitemComponent implements OnInit {
 
-  todolist:TodoItem[];
+  todolist: TodoItemViewModel[];
 
   constructor(private todoService: TodoService) {
-   }
+  }
 
   ngOnInit() {
     this.getTodos();
   }
 
-  getTodos():void{
+  getTodos(): void {
     this.todoService.getTodos().subscribe(todos => {
-      this.todolist=todos;      
+      this.todolist = todos;
     });
   }
 
-  Delete(todo:TodoItem){
-    console.log("delete")
+  Delete(id: string): void {
+    console.log('delete: ' + id);
+    this.todolist = this.todolist.filter(todo => todo.Id !== id);
+    this.todoService.deleteTodo(id).subscribe();
     return;
   }
 }

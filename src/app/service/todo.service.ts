@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { TodoItem } from '../Class/TodoItem';
-import { TodoItemViewModel} from '../Class/TodoItemViewModel'
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpResponse, HttpRequest } from '@angular/common/http';
-import {ApiResponse} from '../Class/ApiResponse';
+import { TodoItemViewModel } from '../Class/TodoItemViewModel'
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,24 +13,28 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TodoService {
-  //private todoApi:string = 'https://c10hwa9l58.execute-api.ap-southeast-2.amazonaws.com/dev';//
-  private todoApi:string = 'https://viraox50w4.execute-api.ap-southeast-2.amazonaws.com/Stage';
+  private todoApi = 'https://viraox50w4.execute-api.ap-southeast-2.amazonaws.com/Stage';
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
-  getTodos():Observable<TodoItem[]>{
-    return this.http.get(this.todoApi)
-    .pipe(
-      map((resp:any)=> JSON.parse(resp.body)),
-      tap(_=>  console.log("Fetched data"))
+  getTodos(): Observable<TodoItemViewModel[]> {
+    return this.http.get<TodoItemViewModel[]>(this.todoApi)
+      .pipe(
+        tap(_ => console.log('Fetched data'))
+      );
+  }
+
+  addTodos(todoitem: TodoItem): Observable<TodoItem> {
+    console.log('put obj ' + todoitem);
+    return this.http.post<TodoItem>(this.todoApi + '/TodoItem', todoitem).pipe(
+      tap(_ => console.log('Put a new object'))
     );
   }
 
-  addTodos(todoitem:TodoItemViewModel):Observable<any>{
-    console.log("put obj "+todoitem);
-    return this.http.put<TodoItemViewModel>(this.todoApi+'/TodoItem',todoitem).pipe(
-      tap(_=> console.log("Put a new object"))
+  deleteTodo(id: string): Observable<TodoItem> {
+    return this.http.delete<TodoItem>(this.todoApi + '/TodoItem/' + id, httpOptions).pipe(
+      tap(_ => console.log('Delete an object'))
     );
   }
 }

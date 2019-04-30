@@ -5,7 +5,7 @@
         <tbody>
           <tr *ngFor="let todo of todolist" [class.finished]="todo.IsDone">
             <td>{{todo.Name}}</td>
-            <td>Created: {{todo.CreatedDatetimeUtc | date : "dd/MM/yyyy"}}</td>
+            <td>Due: {{ todo.DueDate | date : "dd/MM/yyyy"}}</td>
             <td>
               <div class="ui checkbox">
                 <input type="checkbox" [(ngModel)]="todo.IsDone" [ngModelOptions]="{standalone: true}"
