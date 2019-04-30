@@ -25,9 +25,9 @@ export class TodoService {
       );
   }
 
-  addTodos(todoitem: TodoItem): Observable<TodoItem> {
+  addTodos(todoitem: TodoItemViewModel): Observable<TodoItemViewModel> {
     console.log('put obj ' + todoitem);
-    return this.http.post<TodoItem>(this.todoApi + '/TodoItem', todoitem).pipe(
+    return this.http.post<TodoItemViewModel>(this.todoApi + '/TodoItem', todoitem,httpOptions).pipe(
       tap(_ => console.log('Put a new object'))
     );
   }

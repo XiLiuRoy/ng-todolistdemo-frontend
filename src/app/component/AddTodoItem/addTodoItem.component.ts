@@ -10,28 +10,35 @@ import { TodoItem } from 'src/app/Class/TodoItem';
 })
 export class AddTodoItemComponent implements OnInit {
   todolist: TodoItemViewModel[];
-  newTodo: TodoItem;
+  newTodo: TodoItemViewModel;
 
   constructor(private todoService: TodoService) {
 
   }
 
   ngOnInit() {
-    this.newTodo = new TodoItem();
+    this.newTodo = new TodoItemViewModel();
     this.getTodos();
     console.log(this.newTodo);
   }
 
   getTodos(): void {
-    this.todoService.getTodos().subscribe(todos => {
-      this.todolist = todos;
-    });
+    this.todoService.getTodos().subscribe(todos => this.todolist = todos.sort((a,b)=>{
+      return a.CreatedDate < b.CreatedDate ?1:-1;
+    }));
   }
 
   addTodo(): void {
-    console.log(this.newTodo);
-    this.todoService.addTodos(this.newTodo).subscribe(todo => console.log('add todo'));
-    this.newTodo = new TodoItem();
+    this.todoService.addTodos(this.newTodo).subscribe(
+      resp => {
+        console.log(resp);
+        this.todolist.push(resp);
+        this.todolist.sort((a,b)=>{
+          return a.CreatedDate < b.CreatedDate ?1:-1;
+        });
+      }
+    );
+    this.newTodo = new TodoItemViewModel();
   }
 
 }
